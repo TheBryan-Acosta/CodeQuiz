@@ -53,17 +53,7 @@ var quizQuestions = [
 ];
 var score = 0;
 var quesNum = 0;
-var timeleft = 10;
-
-
-function makeTimer(){ 
-    if(timeleft <= 0){
-        quizEnd();
-        clearInterval(timeleft);
-    }
-    timeleft--;
-    document.getElementById("countdown").textContent = 'Time: ' + timeleft;
-};
+var timeleft = 120;
 
 function selectStart(){
     // Create the introductory
@@ -98,7 +88,18 @@ selectStart();
 
 function quizStart(){
 
-    setInterval(makeTimer, 1000);
+    var myInterval = setInterval(function() {
+        timeleft--;
+        document.getElementById("countdown").textContent = 'Time: ' + timeleft;
+    
+        console.log(timeleft);
+         if (timeleft === 0 || quesNum == 10) {
+             clearInterval(myInterval);
+             document.getElementById("questionBox").remove();
+             quizEnd();
+         }
+    }, 1000);
+
 
     console.log("quizStart")
     document.querySelector("#introduction").remove();
@@ -115,6 +116,10 @@ function quizStart(){
     var questionList = document.createElement("ol");
     questionList.setAttribute("type", "A");
     questionBox.appendChild(questionList);
+
+    var resultNoti = document.createElement("p");
+    resultNoti.id = "NotiBox";
+    questionBox.appendChild(resultNoti);
 
     for(var i = 0; i < 4; i++){
         var anwserChoice = document.createElement("li");
@@ -136,6 +141,7 @@ function quizStart(){
 function quizPopulate(){
 
     if(quesNum == 10){
+        document.getElementById("questionBox").remove();
         quizEnd();
         return false;
     }
@@ -157,8 +163,9 @@ function quizPopulate(){
 }
 
 function anwsertaskHandler(event){
-        if(event.target.textContent == quizQuestions[quesNum].correct){
+        if(event.target.textContent == quizQuestions[quesNum].correct && event.target.className == "btn btn-primary font-weight-bold"){
             console.log(score);
+            document.getElementById("NotiBox").textContent = "Correct!";
             score = score + 10;
             quesNum++;
             quizPopulate();
@@ -166,11 +173,40 @@ function anwsertaskHandler(event){
 
         else if(event.target.textContent != quizQuestions[quesNum].correct && event.target.className == "btn btn-primary font-weight-bold"){
             console.log("wrong");
+            document.getElementById("NotiBox").textContent = "Wrong!";
             quesNum++;
+            timeleft = timeleft - 10;
             quizPopulate();
         }
 }
 
 function quizEnd(){
-    document.getElementById("questionBox").remove();
+
+    score = score + timeleft;
+    var finishBox = document.createElement("div");
+    finishBox.className = "col justify-content-center";
+
+    var finishText = document.createElement("h3")
+    finishText.className = "my-2";
+    finishText.textContent = 'Congrats! you finished with a score of ' + score + "! (Your grade plus time left!)";
+    finishBox.appendChild(finishText);
+
+    var inputLabel = document.createElement("label");
+    inputLabel.textContent = "Enter your initals here to save a highscore!: ";
+    inputLabel.className = "";
+    finishBox.appendChild(inputLabel);
+
+
+    var inputField = document.createElement("input");
+    inputField.setAttribute("type", "Initials");
+    inputField.className = "forum-control mx-2";
+    finishBox.appendChild(inputField);
+
+    var submitBtn = document.createElement("button")
+    submitBtn.className = "btn btn-success font-weight-bold";
+    submitBtn.textContent = "SUBMIT"
+    finishBox.appendChild(submitBtn);
+
+    content_box.appendChild(finishBox);
+
 }
