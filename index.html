@@ -10,13 +10,14 @@
 </head>
 <body>
     
+    <!-- creates the main container that will house the content, with a button to display the highscore modal, and time-->
     <div class="container container-small  mt-5 py-2" id="container">
         <div class="row justify-content-between">
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modaldisplay">View Highscores</button>
             <div class="col font-weight-bold text-right" id="countdown">Time: 120</div>
         </div>
     </div>
-
+    <!-- DISPLAYS the highscore modal when highscore button is pressed-->
     <div class="modal" id="modaldisplay" tabindex="-1" role="dialog">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -35,6 +36,7 @@
         </div>
       </div>
       
+      <!-- load out script file and bootstrap js files-->
     <script src="assets/script.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
