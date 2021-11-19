@@ -12,6 +12,11 @@ Was used to allow the user to run a 120 second ten question test, and when the u
 I used js to save user information into localStorage to hold their grade and name, after which I retrieved - formatted and implemented the scores to display the top three scores on the highscores modals body.
 ## **Examples**
 
+
+https://user-images.githubusercontent.com/82281061/142519095-f0c92b26-85f3-467e-937d-421ca263cbdb.mp4
+
+
+
 ## **Installation**
 Developed with HTML, CSS, js through Visual Studio Code.
 
