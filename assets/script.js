@@ -250,7 +250,7 @@ function quizEnd(){
     //label the form with instructions for submitting name, append to div
     var forumLabel = document.createElement("label")
     forumLabel.setAttribute("for", "name");
-    forumLabel.textContent = "Save your initials to sumbit your score! (1-3 letters)";
+    forumLabel.textContent = "Save your initials to submit your score! (1-3 letters)";
     formGroup.appendChild(forumLabel);
 
     //a input box for entering name, append to div
